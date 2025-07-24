@@ -27,6 +27,7 @@ jobs:
           SECRETID: ${{ secrets.SECRETID }}
           SECRETKEY: ${{ secrets.SECRETKEY }}
           CDN_DOMAIN: ${{ secrets.CDN_DOMAIN }}
+          ZONE_ID: ${{ secrets.ZONE_ID }}
           CERT_HOME: /home/runner/.acme.sh
           ACME_HOME: /home/runner/.acme.sh
           WORK_DIR: .
