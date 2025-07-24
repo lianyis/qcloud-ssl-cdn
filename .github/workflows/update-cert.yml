@@ -20,8 +20,8 @@ jobs:
 
       - name: Update Cert
         env:
-          DPI_ID: ${{ secrets.DPI_ID }}
-          DPI_KEY: ${{ secrets.DPI_KEY }}
+          DPI_Id: ${{ secrets.DPI_Id }}
+          DPI_Key: ${{ secrets.DPI_Key }}
           ACME_DNS_TYPE: ${{ secrets.ACME_DNS_TYPE }}
           ACME_DOMAIN: ${{ secrets.ACME_DOMAIN }}
           SECRETID: ${{ secrets.SECRETID }}
