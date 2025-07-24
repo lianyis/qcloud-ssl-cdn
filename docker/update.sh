@@ -47,22 +47,28 @@ SECRETKEY = "${SECRETKEY}"
 
 # 控制功能开关
 # 是否进行上传证书文件的操作（根据CER_FILE和KEY_FILE）
-UPLOAD_SSL = ${UPLOAD_SSL:-True}
+# UPLOAD_SSL = ${UPLOAD_SSL:-True}
+UPLOAD_SSL: True
 # 以下为HTTPS额外功能
 # 是否开启HTTP2
-ENABLE_HTTP2 = ${ENABLE_HTTP2:-True}
+# ENABLE_HTTP2 = ${ENABLE_HTTP2:-True}
+ENABLE_HTTP2: False
 # 是否开启HSTS
-ENABLE_HSTS = ${ENABLE_HSTS:-True}
+# ENABLE_HSTS = ${ENABLE_HSTS:-True}
+ENABLE_HSTS: False
 # 为HSTS设定最长过期时间（以秒为单位）
-HSTS_TIMEOUT_AGE = ${HSTS_TIMEOUT_AGE:-15552000}
+# HSTS_TIMEOUT_AGE = ${HSTS_TIMEOUT_AGE:-15552000}
+HSTS_TIMEOUT_AGE: 31536000
 # HSTS包含子域名（仅对泛域名有效）
-HSTS_INCLUDE_SUBDOMAIN = ${HSTS_INCLUDE_SUBDOMAIN:-True}
+# HSTS_INCLUDE_SUBDOMAIN = ${HSTS_INCLUDE_SUBDOMAIN:-True}
+HSTS_INCLUDE_SUBDOMAIN: False
 # 是否开启OCSP
-ENABLE_OCSP = ${ENABLE_OCSP:-True}
+# ENABLE_OCSP = ${ENABLE_OCSP:-True}
+ENABLE_OCSP: False
 # 是否删除适用于CDN_DOMAIN域名下的其他所有证书
 # 满足以下条件：证书适用于CDN_DOMAIN、证书id不是本次使用的id
-DELETE_OLD_CERTS = ${DELETE_OLD_CERTS:-True}
-
+# DELETE_OLD_CERTS = ${DELETE_OLD_CERTS:-True}
+DELETE_OLD_CERTS: True
 # 是否进行为CDN_DOMAIN更换SSL证书的操作
 # 若UPDATE_SSL = True且UPLOAD_SSL = True，则CERT_ID可不设置，直接利用UPLOAD_SSL的证书
 # UPDATE_SSL = ${UPDATE_SSL:-True}
@@ -70,13 +76,15 @@ UPDATE_SSL = False
 
 # 是否为腾讯云直播域名更换SSL证书的操作
 # 若UPDATE_LIVE_SSL = True 注意请将UPDATE_SSL、ENABLE_HSTS、ENABLE_OCSP、ENABLE_HTTP2 设置为 False
-UPDATE_LIVE_SSL = ${UPDATE_LIVE_SSL:-False}
-
+# UPDATE_LIVE_SSL = ${UPDATE_LIVE_SSL:-False}
+UPDATE_LIVE_SSL: False
 CERT_ID = ""
 # 是否进行预热URL的操作
-PUSH_URL = ${PUSH_URL:-True}
+# PUSH_URL = ${PUSH_URL:-True}
+PUSH_URL: False
 # 是否进行刷新URL的操作
-PURGE_URL = ${PURGE_URL:-True}
+# PURGE_URL = ${PURGE_URL:-True}
+PURGE_URL: False
 # 自定义的预热URL（默认会预热sitemap.xml的所有链接）文件路径
 # 该文件内，每行一个URL，例如
 # https://blog.whuzfb.cn/img/me2.jpg
