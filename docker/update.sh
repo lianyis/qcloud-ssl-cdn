@@ -47,8 +47,7 @@ SECRETKEY = "${SECRETKEY}"
 
 # 控制功能开关
 # 是否进行上传证书文件的操作（根据CER_FILE和KEY_FILE）
-# UPLOAD_SSL = ${UPLOAD_SSL:-True}
-UPLOAD_SSL: True
+UPLOAD_SSL = ${UPLOAD_SSL:-True}
 # 以下为HTTPS额外功能
 # 是否开启HTTP2
 # ENABLE_HTTP2 = ${ENABLE_HTTP2:-True}
