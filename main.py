@@ -199,19 +199,19 @@ def process_domain_config(secret_id, secret_key, domain, cert_id):
     '''
     if config.UPDATE_SSL:
         run_config_cdn(secret_id, secret_key, domain, cert_id)
-    if config.ENABLE_HSTS or config.ENABLE_OCSP or config.ENABLE_HTTP2:
-        https_options_enabler(secret_id, secret_key, domain, config.ENABLE_HTTP2, config.ENABLE_HSTS,
-                              config.HSTS_TIMEOUT_AGE, config.HSTS_INCLUDE_SUBDOMAIN, config.ENABLE_OCSP)
+    #if config.ENABLE_HSTS or config.ENABLE_OCSP or config.ENABLE_HTTP2:
+    #    https_options_enabler(secret_id, secret_key, domain, config.ENABLE_HTTP2, config.ENABLE_HSTS,
+    #                          config.HSTS_TIMEOUT_AGE, config.HSTS_INCLUDE_SUBDOMAIN, config.ENABLE_OCSP)
     if config.DELETE_OLD_CERTS:
         delete_old_ssls(secret_id, secret_key, domain, cert_id)
-    if config.PUSH_URL:
-        run_url_push(secret_id, secret_key, domain, config.URLS_FILE)
-    if config.PURGE_URL:
-        run_purge_url(secret_id, secret_key, domain, config.URLS_FILE)
+    #if config.PUSH_URL:
+    #    run_url_push(secret_id, secret_key, domain, config.URLS_FILE)
+    #if config.PURGE_URL:
+    #    run_purge_url(secret_id, secret_key, domain, config.URLS_FILE)
     if config.ZONE_ID:
         run_config_teo(secret_id, secret_key, config.ZONE_ID, domain, cert_id)
-    if config.UPDATE_LIVE_SSL:
-        run_config_live(secret_id, secret_key, domain, cert_id)
+    #if config.UPDATE_LIVE_SSL:
+    #   run_config_live(secret_id, secret_key, domain, cert_id)
 
 def get_cdn_domains(secret_id, secret_key, cert_id):
     '''
