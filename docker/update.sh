@@ -66,8 +66,8 @@ HSTS_INCLUDE_SUBDOMAIN: False
 ENABLE_OCSP: False
 # 是否删除适用于CDN_DOMAIN域名下的其他所有证书
 # 满足以下条件：证书适用于CDN_DOMAIN、证书id不是本次使用的id
-# DELETE_OLD_CERTS = ${DELETE_OLD_CERTS:-True}
-DELETE_OLD_CERTS: True
+DELETE_OLD_CERTS = ${DELETE_OLD_CERTS:-True}
+
 # 是否进行为CDN_DOMAIN更换SSL证书的操作
 # 若UPDATE_SSL = True且UPLOAD_SSL = True，则CERT_ID可不设置，直接利用UPLOAD_SSL的证书
 # UPDATE_SSL = ${UPDATE_SSL:-True}
