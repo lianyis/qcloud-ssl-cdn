@@ -2,24 +2,39 @@ name: Keep Alive
 
 on:
   schedule:
-    # 每天 UTC 时间 0点运行一次检查
-    - cron: '0 0 * * *'
-  workflow_dispatch: # 保留这个，允许你手动点按钮测试运行
+    - cron: '0 0 * * *' # 每天检查一次
+  workflow_dispatch:    # 允许手动运行
 
 jobs:
-  keep-alive-job:
+  keep-alive:
     runs-on: ubuntu-latest
     permissions:
-      contents: write  # 显式声明需要写权限，配合仓库设置使用
-    
+      contents: write   # 重要：必须赋予写权限
     steps:
       - uses: actions/checkout@v4
       
-      - name: Keepalive Workflow
-        uses: gautamkrishnar/keepalive-workflow@v2
-        with:
-          # 默认检测机制：如果 50 天没提交，就自动提交一次
-          # 只要你平时有提交，它就不会运行，非常干净
-          commit_message: "chore: automated commit to keep workflow alive"
-          committer_username: "github-actions[bot]"
-          committer_email: "github-actions[bot]@users.noreply.github.com"
+      - name: Check and Commit
+        run: |
+          # 配置 Git 用户信息（使用 GitHub Actions 机器人账号）
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          
+          # 获取最近一次提交的时间
+          last_commit_date=$(git log -1 --format=%cd --date=iso-strict)
+          current_date=$(date -Iseconds)
+          
+          # 计算天数差 (利用 seconds 转换)
+          last_commit_seconds=$(date -d "$last_commit_date" +%s)
+          current_seconds=$(date -d "$current_date" +%s)
+          diff_days=$(( ($current_seconds - $last_commit_seconds) / 86400 ))
+          
+          echo "Days since last commit: $diff_days"
+          
+          # 如果超过 50 天没有提交，就提交一次空提交
+          if [ "$diff_days" -gt 50 ]; then
+            echo "No activity for 50 days. Committing to keep alive..."
+            git commit --allow-empty -m "chore: keep workflow alive"
+            git push
+          else
+            echo "Repository is active. No need to commit."
+          fi
