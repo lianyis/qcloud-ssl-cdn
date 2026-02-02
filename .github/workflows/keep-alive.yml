@@ -1,0 +1,25 @@
+name: Keep Alive
+
+on:
+  schedule:
+    # 每天 UTC 时间 0点运行一次检查
+    - cron: '0 0 * * *'
+  workflow_dispatch: # 保留这个，允许你手动点按钮测试运行
+
+jobs:
+  keep-alive-job:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write  # 显式声明需要写权限，配合仓库设置使用
+    
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Keepalive Workflow
+        uses: gautamkrishnar/keepalive-workflow@v2
+        with:
+          # 默认检测机制：如果 50 天没提交，就自动提交一次
+          # 只要你平时有提交，它就不会运行，非常干净
+          commit_message: "chore: automated commit to keep workflow alive"
+          committer_username: "github-actions[bot]"
+          committer_email: "github-actions[bot]@users.noreply.github.com"
