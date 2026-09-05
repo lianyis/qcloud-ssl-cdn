@@ -19,6 +19,7 @@ jobs:
           pip install -r requirements.txt
 
       - name: Update Cert
+        uses: nick-fields/retry@v3
         env:
           DPI_Id: ${{ secrets.DPI_Id }}
           DPI_Key: ${{ secrets.DPI_Key }}
@@ -32,7 +33,11 @@ jobs:
           CERT_HOME: /home/runner/.acme.sh
           ACME_HOME: /home/runner/.acme.sh
           WORK_DIR: .
-        run: sh ./docker/update.sh
+        with:
+          timeout_minutes: 30
+          max_attempts: 3
+          retry_wait_seconds: 3600
+          command: sh ./docker/update.sh
 
       - name: Notification
         uses: monlor/bark-action@v3
